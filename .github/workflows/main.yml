@@ -1,4 +1,3 @@
-yaml 
 name: "Sphinx: Render docs"
 
 on: push
