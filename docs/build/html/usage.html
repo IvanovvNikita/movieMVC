@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Usage &#8212; документация MovieMVC </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="prev" title="Welcome to MovieMVC documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<section id="movie">
+<h2>Movie<a class="headerlink" href="#movie" title="Link to this heading">¶</a></h2>
+<p>Представляет информацию о фильме.</p>
+<dl class="py class" id="module-movies">
+<dt class="sig sig-object py" id="movies.Movie">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">movies.</span></span><span class="sig-name descname"><span class="pre">Movie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#movies.Movie" title="Link to this definition">¶</a></dt>
+<dd><p>Представляет информацию о фильме.</p>
+<dl>
+<dt>Attributes:</dt><dd><p>id (UUID): Уникальный идентификатор фильма.</p>
+<p>title (str): Название фильма.</p>
+<p>description (str): Описание фильма.</p>
+<p>genre (str): Жанр фильма.</p>
+<p>age_rating (str): Возрастной рейтинг фильма (G, PG, PG-13, R, R-17).</p>
+<p>release_date (date): Дата выпуска фильма.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="movielist">
+<h2>MovieList<a class="headerlink" href="#movielist" title="Link to this heading">¶</a></h2>
+<p>Представляет список фильмов.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="movies.MovieList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">movies.</span></span><span class="sig-name descname"><span class="pre">MovieList</span></span><a class="headerlink" href="#movies.MovieList" title="Link to this definition">¶</a></dt>
+<dd><p>Представляет список фильмов.</p>
+<dl>
+<dt>Methods:</dt><dd><p>default(): Устанавливает список фильмов по умолчанию.</p>
+<p>create(title, desc, genre, age, release) -&gt; UUID: Создает новый фильм и добавляет его в список.</p>
+<p>delete(id: UUID): Удаляет фильм из списка по заданному идентификатору.</p>
+<p>get_all() -&gt; list: Возвращает список всех фильмов.</p>
+<p>get_by_title(title) -&gt; Movie: Возвращает фильм с заданным названием.</p>
+<p>recommend(age, genre=None) -&gt; Movie: Рекомендует фильм на основе возраста и жанра.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="application">
+<h2>Application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h2>
+<p>Управляет графическим интерфейсом curses и создает экземпляры других классов.</p>
+<dl class="py class" id="module-main">
+<dt class="sig sig-object py" id="main.Application">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Application" title="Link to this definition">¶</a></dt>
+<dd><p>Класс приложения, управляющий моделями, представлениями и контроллерами.</p>
+<dl>
+<dt>Атрибуты:</dt><dd><p>window (curses.window): Окно приложения.</p>
+<p>moviesModel (MovieListModel): Модель списка фильмов.</p>
+<p>header (HeaderView): Представление заголовка приложения.</p>
+<p>main_window (MovieListView): Представление списка фильмов.</p>
+<p>side_menu (MovieView): Представление выбранного фильма в боковом меню.</p>
+<p>side_menu_controller (Controller): Контроллер для бокового меню.</p>
+</dd>
+<dt>Методы:</dt><dd><p>__init__(self, window): Инициализация приложения.</p>
+<p>refresh(self): Обновление всех представлений приложения.</p>
+<p>run(self): Запуск приложения.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="movielistmodel">
+<h2>MovieListModel<a class="headerlink" href="#movielistmodel" title="Link to this heading">¶</a></h2>
+<p>Хранит список фильмов и выбранный фильм. Предоставляет методы для получения списка фильмов, удаления фильма и переключения на следующий/предыдущий фильм.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.MovieListModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">MovieListModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#movies.MovieList" title="movies.MovieList"><span class="pre">MovieList</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.MovieListModel" title="Link to this definition">¶</a></dt>
+<dd><p>Модель списка фильмов.</p>
+<dl>
+<dt>Атрибуты:</dt><dd><p>_movies (MovieList): Список фильмов.</p>
+<p>selected (int): Индекс выбранного фильма.</p>
+</dd>
+<dt>Методы:</dt><dd><p>__init__(self, movies): Инициализация модели.</p>
+<p>get_movies(self): Получение всех фильмов.</p>
+<p>delete_item(self): Удаление выбранного фильма.</p>
+<p>next_item(self): Выбор следующего фильма в списке.</p>
+<p>prev_item(self): Выбор предыдущего фильма в списке.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="movielistview">
+<h2>MovieListView<a class="headerlink" href="#movielistview" title="Link to this heading">¶</a></h2>
+<p>Отображает список фильмов в окне.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.MovieListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">MovieListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.MovieListView" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="headerview">
+<h2>HeaderView<a class="headerlink" href="#headerview" title="Link to this heading">¶</a></h2>
+<p>Отображает заголовок приложения в окне.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.HeaderView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">HeaderView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.HeaderView" title="Link to this definition">¶</a></dt>
+<dd><p>Представление заголовка.</p>
+<dl>
+<dt>Атрибуты:</dt><dd><p>title (str): Заголовок представления.</p>
+<p>window (curses.window): Окно представления заголовка.</p>
+<p>center (int): Координата X для выравнивания заголовка по центру.</p>
+</dd>
+<dt>Методы:</dt><dd><p>__init__(self, title): Инициализация представления заголовка.</p>
+<p>init_window(self, window, height, width, begin_y, begin_x): Инициализация окна представления заголовка.</p>
+<p>refresh(self): Обновление представления заголовка.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="controller">
+<h2>Controller<a class="headerlink" href="#controller" title="Link to this heading">¶</a></h2>
+<p>Обрабатывает пользовательский ввод и управляет моделью и представлением.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.Controller">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Controller" title="Link to this definition">¶</a></dt>
+<dd><p>Контроллер для управления представлением и моделью.</p>
+<dl>
+<dt>Атрибуты:</dt><dd><p>window (curses.window): Окно приложения.</p>
+<p>model (MovieListModel): Модель списка фильмов.</p>
+<p>view: Представление списка фильмов.</p>
+</dd>
+<dt>Методы:</dt><dd><p>__init__(self, window, model, view): Инициализация контроллера.</p>
+<p>run(self): Запуск основного цикла контроллера.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="movieview">
+<h2>MovieView<a class="headerlink" href="#movieview" title="Link to this heading">¶</a></h2>
+<p>Отображает информацию о выбранном фильме в окне.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.MovieView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">MovieView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.MovieView" title="Link to this definition">¶</a></dt>
+<dd><p>Представление выбранного фильма.</p>
+<dl>
+<dt>Атрибуты:</dt><dd><p>model (MovieListModel): Модель списка фильмов.</p>
+<p>window (curses.window): Окно представления фильма.</p>
+<p>movie (Movie): Выбранный фильм для отображения.</p>
+</dd>
+<dt>Методы:</dt><dd><p>__init__(self, model): Инициализация представления фильма.</p>
+<p>refresh(self): Обновление представления фильма.</p>
+<p>movie_view(self): Отображение информации о фильме.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MovieMVC</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#movie">Movie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#movies.Movie"><code class="docutils literal notranslate"><span class="pre">Movie</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#movielist">MovieList</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#movies.MovieList"><code class="docutils literal notranslate"><span class="pre">MovieList</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#application">Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#movielistmodel">MovieListModel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.MovieListModel"><code class="docutils literal notranslate"><span class="pre">MovieListModel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#movielistview">MovieListView</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.MovieListView"><code class="docutils literal notranslate"><span class="pre">MovieListView</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#headerview">HeaderView</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.HeaderView"><code class="docutils literal notranslate"><span class="pre">HeaderView</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#controller">Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#movieview">MovieView</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.MovieView"><code class="docutils literal notranslate"><span class="pre">MovieView</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="предыдущая глава">Welcome to MovieMVC documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1980, Ivanov Nikita.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
